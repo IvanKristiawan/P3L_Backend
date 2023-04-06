@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000;
 // Import Routes
 const UserRoute = require("./User/routes/UserRoute.js");
 const HakAksesRoute = require("./User/routes/HakAkses/HakAksesRoute.js");
+const AktivasiRoute = require("./User/routes/Aktivasi/AktivasiRoute.js");
 const AuthRoute = require("./User/routes/AuthRoute.js");
 const JadwalInstrukturRoute = require("./Master/routes/JadwalInstruktur/JadwalInstrukturRoute.js");
 const JadwalGymRoute = require("./Master/routes/JadwalGym/JadwalGymRoute.js");
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(UserRoute);
 app.use("/auth", AuthRoute);
 app.use(HakAksesRoute);
+app.use(AktivasiRoute);
 app.use(JadwalInstrukturRoute);
 app.use(JadwalGymRoute);
 app.use(BookingGymRoute);
