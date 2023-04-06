@@ -1,0 +1,211 @@
+### Register
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "username":"10588_IvanKristiawan",
+    "password": "ivan",
+    "tipeUser": "MANAGER",
+    "akses": {
+        "daftarUser": true
+    }
+}
+
+### Login
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "username":"10588_IvanKristiawan",
+    "password": "ivan"
+}
+
+### Get All User
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get User By Id
+POST http://localhost:5000/findUser/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Update User 
+POST http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+    "akses": {
+      "daftarUser": true
+    },
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Aktivasi User 
+POST http://localhost:5000/aktivasiUser/4
+Content-Type: application/json
+
+{
+    "aktivasi": true,
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Update Deposit User 
+POST http://localhost:5000/updateDepositUser/4
+Content-Type: application/json
+
+{
+    "deposit": 10000,
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Update User Then Login
+POST http://localhost:5000/updateUserThenLogin/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MDQ4NDM0LCJleHAiOjE2NzgzNDQ0MzR9.p_KA5GF7BsROTWIP62gP-uh8u0mLB8emlwf2w72LHuc"
+}
+
+### Get User By Username
+POST http://localhost:5000/getUsername
+Content-Type: application/json
+
+{
+    "username": "MANAGER",
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get All Jadwal Instruktur
+POST http://localhost:5000/jadwalInstrukturs
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get Jadwal Instruktur By Id
+POST http://localhost:5000/jadwalInstrukturs/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Save Jadwal Instruktur 
+POST http://localhost:5000/saveJadwalInstruktur
+Content-Type: application/json
+
+{
+    "namaKelas": "zumba",
+    "dariJam": "10.00",
+    "sampaiJam": "11.00",
+    "tanggal": "2023-03-05",
+    "userId": 2,
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get All Jadwal Gym 
+POST http://localhost:5000/jadwalGyms
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get Jadwal Gym By Id
+POST http://localhost:5000/jadwalGyms/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Save Jadwal Gym
+POST http://localhost:5000/saveJadwalGym
+Content-Type: application/json
+
+{
+    "dariJam": "10.00",
+    "sampaiJam": "11.00",
+    "tanggal": "2023-03-05",
+    "jumlahMember": 2,
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get All Booking Gym 
+POST http://localhost:5000/bookingGyms
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get Booking Gym By Id
+POST http://localhost:5000/bookingGyms/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Save Booking Gym 
+POST http://localhost:5000/saveBookingGym
+Content-Type: application/json
+
+{
+    "userId": 5,
+    "jadwalGymId": 4,
+    "_id": 5,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjc5ODc2NTMyLCJleHAiOjE2ODExNzI1MzJ9.RfxuLYk2VIxlxr_ai0xCiF0nTayfhoafcQnnSMf-yy0"
+}
+
+### Get All Booking Kelas
+POST http://localhost:5000/bookingKelas
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Get Booking Kelas By Id
+POST http://localhost:5000/bookingKelas/1
+Content-Type: application/json
+
+{
+    "_id": 1,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+}
+
+### Save Booking Kelas
+POST http://localhost:5000/saveBookingKelas
+Content-Type: application/json
+
+{
+    "userId": 5,
+    "jadwalInstrukturId": 3,
+    "_id": 5,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjc5ODc2NTMyLCJleHAiOjE2ODExNzI1MzJ9.RfxuLYk2VIxlxr_ai0xCiF0nTayfhoafcQnnSMf-yy0"
+}
