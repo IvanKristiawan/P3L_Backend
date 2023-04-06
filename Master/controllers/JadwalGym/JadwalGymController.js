@@ -1,9 +1,22 @@
 const JadwalGym = require("../../models/JadwalGym/JadwalGymModel.js");
+const { formatDate } = require("../../../helper/helper");
 
 const getJadwalGyms = async (req, res) => {
   try {
+    let tempJadwalGyms = [];
     const jadwalGyms = await JadwalGym.findAll({});
-    res.status(200).json(jadwalGyms);
+
+    // Formatting date and Parsing json from string data
+    for (let element of jadwalGyms) {
+      let objectJadwalGym = {
+        ...element.dataValues,
+        tanggal: formatDate(element.dataValues.tanggal),
+        libur: element.dataValues.libur === true ? "LIBUR" : "MASUK",
+      };
+      tempJadwalGyms.push(objectJadwalGym);
+    }
+
+    res.status(200).json(tempJadwalGyms);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });

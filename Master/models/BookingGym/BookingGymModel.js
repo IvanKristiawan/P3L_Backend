@@ -14,6 +14,11 @@ const BookingGym = db.define(
       default: 1,
       allowNull: false,
     },
+    absensi: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+      allowNull: false,
+    },
     // Foreign Key Jadwal Gym
     jadwalGymId: {
       type: DataTypes.INTEGER,

@@ -31,6 +31,11 @@ const JadwalGym = db.define(
       defaultValue: 0,
       allowNull: false,
     },
+    libur: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+      allowNull: false,
+    },
   },
   {
     freezeTableName: true,
