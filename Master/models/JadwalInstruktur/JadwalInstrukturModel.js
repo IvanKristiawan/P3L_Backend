@@ -37,6 +37,11 @@ const JadwalInstruktur = db.define(
       defaultValue: 0,
       allowNull: false,
     },
+    harga: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
 
     // Foreign Key User
     userId: {
