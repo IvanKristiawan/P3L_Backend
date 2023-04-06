@@ -3,10 +3,15 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "username":"10588_IvanKristiawan",
-    "password": "ivan",
+    "username":"MANAGER",
+    "password": "MGR",
     "tipeUser": "MANAGER",
     "akses": {
+        "bookingGym": true,
+        "bookingKelas": true,
+        "jadwalGym": true,
+        "jadwalInstruktur": true,
+        "profilUser": true,
         "daftarUser": true
     }
 }
@@ -16,8 +21,8 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "username":"10588_IvanKristiawan",
-    "password": "ivan"
+    "username":"MANAGER",
+    "password": "MGR"
 }
 
 ### Get All User
@@ -26,7 +31,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get User By Id
@@ -35,7 +40,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Update User 
@@ -47,7 +52,7 @@ Content-Type: application/json
       "daftarUser": true
     },
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Aktivasi User 
@@ -57,7 +62,7 @@ Content-Type: application/json
 {
     "aktivasi": true,
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Update Deposit User 
@@ -67,7 +72,7 @@ Content-Type: application/json
 {
     "deposit": 10000,
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Update User Then Login
@@ -86,7 +91,7 @@ Content-Type: application/json
 {
     "username": "MANAGER",
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get All Jadwal Instruktur
@@ -95,7 +100,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get Jadwal Instruktur By Id
@@ -104,7 +109,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Save Jadwal Instruktur 
@@ -118,7 +123,7 @@ Content-Type: application/json
     "tanggal": "2023-03-05",
     "userId": 2,
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get All Jadwal Gym 
@@ -127,7 +132,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get Jadwal Gym By Id
@@ -136,7 +141,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Save Jadwal Gym
@@ -149,7 +154,7 @@ Content-Type: application/json
     "tanggal": "2023-03-05",
     "jumlahMember": 2,
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get All Booking Gym 
@@ -158,7 +163,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get Booking Gym By Id
@@ -167,7 +172,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Save Booking Gym 
@@ -187,7 +192,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Get Booking Kelas By Id
@@ -196,7 +201,7 @@ Content-Type: application/json
 
 {
     "_id": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5ODc2MjkxLCJleHAiOjE2ODExNzIyOTF9.qLlemqnSXb3YVlr39xyVYHcWHhkI1FQIcuKUyEbSQ9Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgwNzU5Njc5LCJleHAiOjE2ODIwNTU2Nzl9.rc4ULj1c6BllMqg4pOzhUvbavIQdf5n7b3wF0w7Wli8"
 }
 
 ### Save Booking Kelas

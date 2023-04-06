@@ -1,4 +1,5 @@
 const User = require("../models/UserModel.js");
+const HakAkses = require("../models/HakAkses/HakAksesModel.js");
 const { createError } = require("../../utils/error.js");
 const jwt = require("jsonwebtoken");
 
@@ -10,9 +11,13 @@ const register = async (req, res) => {
       }
     });
 
-    await User.create({
+    const newUser = await User.create({
       ...req.body,
-      akses: JSON.stringify(req.body.akses),
+    });
+
+    const insertedHakAkses = await HakAkses.create({
+      ...req.body.akses,
+      userId: newUser.dataValues.id,
     });
 
     res.status(200).send(`User ${req.body.username} has been created.`);
@@ -41,11 +46,17 @@ const login = async (req, res, next) => {
 
     const { password, ...otherDetails } = user.dataValues;
 
+    const hakAkses = await HakAkses.findOne({
+      where: {
+        userId: user.dataValues.id,
+      },
+    });
+
     res.status(200).json({
       details: {
         ...otherDetails,
         token,
-        akses: JSON.parse(user.dataValues.akses),
+        akses: hakAkses,
       },
     });
   } catch (error) {

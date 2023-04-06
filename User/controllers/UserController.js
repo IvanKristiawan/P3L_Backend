@@ -1,4 +1,5 @@
 const User = require("../models/UserModel.js");
+const HakAkses = require("../models/HakAkses/HakAksesModel.js");
 const jwt = require("jsonwebtoken");
 
 const updateUser = async (req, res) => {
@@ -42,9 +43,24 @@ const updateUser = async (req, res) => {
       }
     );
 
+    await HakAkses.update(
+      { ...req.body.akses },
+      {
+        where: {
+          userId: req.params.id,
+        },
+      }
+    );
+
     findUser = await User.findOne({
       where: {
         id: req.params.id,
+      },
+    });
+
+    const hakAkses = await HakAkses.findOne({
+      where: {
+        userId: req.params.id,
       },
     });
 
@@ -52,7 +68,7 @@ const updateUser = async (req, res) => {
 
     res.status(200).json({
       ...otherDetails,
-      akses: JSON.parse(findUser.dataValues.akses),
+      akses: hakAkses,
     });
   } catch (error) {
     // Error 400 = Kesalahan dari sisi user
@@ -96,9 +112,24 @@ const updateUserThenLogin = async (req, res) => {
       }
     );
 
+    await HakAkses.update(
+      { ...req.body.akses },
+      {
+        where: {
+          userId: req.params.id,
+        },
+      }
+    );
+
     const user = await User.findOne({
       where: {
         id: req.params.id,
+      },
+    });
+
+    const hakAkses = await HakAkses.findOne({
+      where: {
+        userId: req.params.id,
       },
     });
 
@@ -112,7 +143,7 @@ const updateUserThenLogin = async (req, res) => {
       details: {
         ...otherDetails,
         token,
-        akses: JSON.parse(user.dataValues.akses),
+        akses: hakAkses,
       },
     });
   } catch (error) {
@@ -123,6 +154,11 @@ const updateUserThenLogin = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
+    await HakAkses.destroy({
+      where: {
+        userId: req.params.id,
+      },
+    });
     await User.destroy({
       where: {
         id: req.params.id,
@@ -148,10 +184,15 @@ const getUser = async (req, res) => {
         id: req.params.id,
       },
     });
+    const hakAkses = await HakAkses.findOne({
+      where: {
+        userId: req.params.id,
+      },
+    });
     const { ...otherDetails } = user.dataValues;
     res.status(200).json({
       ...otherDetails,
-      akses: JSON.parse(user.dataValues.akses),
+      akses: hakAkses,
     });
   } catch (error) {
     // Error 500 = Kesalahan di server
@@ -211,10 +252,15 @@ const getUsers = async (req, res) => {
     const users = await User.findAll({});
 
     for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
       const { ...otherDetails } = user.dataValues;
       let objectUser = {
         ...otherDetails,
-        akses: JSON.parse(user.dataValues.akses),
+        akses: hakAkses,
       };
       tempAllUser.push(objectUser);
     }
@@ -234,10 +280,15 @@ const getUsersMember = async (req, res) => {
     });
 
     for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
       const { ...otherDetails } = user.dataValues;
       let objectUser = {
         ...otherDetails,
-        akses: JSON.parse(user.dataValues.akses),
+        akses: hakAkses,
       };
       tempAllUser.push(objectUser);
     }
@@ -259,10 +310,15 @@ const getUsername = async (req, res) => {
     });
 
     for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
       const { ...otherDetails } = user.dataValues;
       let objectUser = {
         ...otherDetails,
-        akses: JSON.parse(user.dataValues.akses),
+        akses: hakAkses,
       };
       tempAllUser.push(objectUser);
     }

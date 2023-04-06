@@ -29,13 +29,6 @@ const User = db.define(
       defaultValue: 0,
       allowNull: false,
     },
-
-    // Objects
-    akses: {
-      type: DataTypes.STRING,
-      default: "",
-      allowNull: true,
-    },
   },
   {
     freezeTableName: true,
