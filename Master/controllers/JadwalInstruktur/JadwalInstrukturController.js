@@ -1,12 +1,24 @@
 const JadwalInstruktur = require("../../models/JadwalInstruktur/JadwalInstrukturModel.js");
 const User = require("../../../User/models/UserModel.js");
+const { formatDate } = require("../../../helper/helper");
 
 const getJadwalInstrukturs = async (req, res) => {
   try {
+    let tempJadwalInstrukturs = [];
     const jadwalinstrukturs = await JadwalInstruktur.findAll({
       include: [{ model: User }],
     });
-    res.status(200).json(jadwalinstrukturs);
+
+    // Formatting date and Parsing json from string data
+    for (let element of jadwalinstrukturs) {
+      let objectPengajuan = {
+        ...element.dataValues,
+        tanggal: formatDate(element.dataValues.tanggal),
+      };
+      tempJadwalInstrukturs.push(objectPengajuan);
+    }
+
+    res.status(200).json(tempJadwalInstrukturs);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
