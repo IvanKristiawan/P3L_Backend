@@ -61,6 +61,13 @@ const saveBookingGym = async (req, res) => {
     }
   });
 
+  const jadwalGym = await JadwalGym.findOne({
+    where: {
+      id: req.body.jadwalGymId,
+    },
+  });
+  let tempJumlahMember = jadwalGym.jumlahMember + 1;
+
   const bookingGyms = await BookingGym.findAll({});
   let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
 
@@ -69,6 +76,16 @@ const saveBookingGym = async (req, res) => {
       noBooking: nextKodeBookingGym,
       ...req.body,
     });
+    await JadwalGym.update(
+      {
+        jumlahMember: tempJumlahMember,
+      },
+      {
+        where: {
+          id: req.body.jadwalGymId,
+        },
+      }
+    );
     // Status 201 = Created
     res.status(201).json(insertedBookingGym);
   } catch (error) {
@@ -109,13 +126,37 @@ const updateBookingGym = async (req, res) => {
 
 const deleteBookingGym = async (req, res) => {
   try {
+    const bookingGym = await BookingGym.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [{ model: User }, { model: JadwalGym }],
+    });
+
+    const jadwalGym = await JadwalGym.findOne({
+      where: {
+        id: bookingGym.jadwalgym.id,
+      },
+    });
+    let tempJumlahMember = jadwalGym.jumlahMember - 1;
+
     await BookingGym.destroy({
       where: {
         id: req.params.id,
       },
-    }).then((num) => {
+    }).then(async (num) => {
       // num come from numbers of updated data
       if (num == 1) {
+        await JadwalGym.update(
+          {
+            jumlahMember: tempJumlahMember,
+          },
+          {
+            where: {
+              id: bookingGym.jadwalgym.id,
+            },
+          }
+        );
         res.status(200).json({ message: "Booking Gym Deleted!" });
       } else {
         res
