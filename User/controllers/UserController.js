@@ -272,11 +272,103 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUsersManager = async (req, res) => {
+  try {
+    let tempAllUser = [];
+    const users = await User.findAll({
+      where: {
+        tipeUser: "MANAGER",
+      },
+    });
+
+    for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
+      const { ...otherDetails } = user.dataValues;
+      let objectUser = {
+        ...otherDetails,
+        akses: hakAkses,
+      };
+      tempAllUser.push(objectUser);
+    }
+
+    res.status(200).json(tempAllUser);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getUsersAdmin = async (req, res) => {
+  try {
+    let tempAllUser = [];
+    const users = await User.findAll({
+      where: {
+        tipeUser: "ADMIN",
+      },
+    });
+
+    for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
+      const { ...otherDetails } = user.dataValues;
+      let objectUser = {
+        ...otherDetails,
+        akses: hakAkses,
+      };
+      tempAllUser.push(objectUser);
+    }
+
+    res.status(200).json(tempAllUser);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getUsersInstruktur = async (req, res) => {
+  try {
+    let tempAllUser = [];
+    const users = await User.findAll({
+      where: {
+        tipeUser: "INSTRUKTUR",
+      },
+    });
+
+    for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
+      const { ...otherDetails } = user.dataValues;
+      let objectUser = {
+        ...otherDetails,
+        akses: hakAkses,
+      };
+      tempAllUser.push(objectUser);
+    }
+
+    res.status(200).json(tempAllUser);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getUsersMember = async (req, res) => {
   try {
     let tempAllUser = [];
     const users = await User.findAll({
-      tipeUser: "MEMBER",
+      where: {
+        tipeUser: "MEMBER",
+      },
     });
 
     for (let user of users) {
@@ -338,6 +430,9 @@ module.exports = {
   aktivasiUser,
   updateDepositUser,
   getUsers,
+  getUsersManager,
+  getUsersAdmin,
+  getUsersInstruktur,
   getUsersMember,
   getUsername,
 };

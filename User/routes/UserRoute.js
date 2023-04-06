@@ -8,6 +8,10 @@ const getUser = content.getUser;
 const aktivasiUser = content.aktivasiUser;
 const updateDepositUser = content.updateDepositUser;
 const getUsers = content.getUsers;
+const getUsersManager = content.getUsersManager;
+const getUsersAdmin = content.getUsersAdmin;
+const getUsersInstruktur = content.getUsersInstruktur;
+const getUsersMember = content.getUsersMember;
 const getUsername = content.getUsername;
 const verifyUser = content2.verifyUser;
 const router = express.Router();
@@ -23,6 +27,10 @@ router.post("/aktivasiUser/:id", verifyUser, aktivasiUser);
 router.post("/updateDepositUser/:id", verifyUser, updateDepositUser);
 // GET ALL
 router.post("/users/", verifyUser, getUsers);
+router.post("/usersManager/", verifyUser, getUsersManager);
+router.post("/usersAdmin/", verifyUser, getUsersAdmin);
+router.post("/usersInstruktur/", verifyUser, getUsersInstruktur);
+router.post("/usersMember/", verifyUser, getUsersMember);
 router.post("/getUsername", verifyUser, getUsername);
 
 module.exports = router;
