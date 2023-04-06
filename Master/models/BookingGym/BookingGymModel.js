@@ -8,6 +8,11 @@ const { DataTypes } = Sequelize;
 const BookingGym = db.define(
   "bookinggyms",
   {
+    noBooking: {
+      type: DataTypes.STRING,
+      default: "",
+      allowNull: false,
+    },
     // Foreign Key User
     userId: {
       type: DataTypes.INTEGER,
@@ -16,7 +21,7 @@ const BookingGym = db.define(
     },
     absensi: {
       type: DataTypes.BOOLEAN,
-      default: false,
+      defaultValue: false,
       allowNull: false,
     },
     // Foreign Key Jadwal Gym

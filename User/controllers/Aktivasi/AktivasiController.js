@@ -34,6 +34,21 @@ const getAktivasiNextKode = async (req, res) => {
   }
 };
 
+const getAktivasiByUser = async (req, res) => {
+  try {
+    const aktivasi = await Aktivasi.findOne({
+      where: {
+        userId: req.body.userId,
+      },
+      include: [{ model: User }],
+    });
+    res.status(200).json(aktivasi);
+  } catch (error) {
+    // Error 404 = Not Found
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const getAktivasiById = async (req, res) => {
   try {
     const aktivasi = await Aktivasi.findOne({
@@ -131,6 +146,7 @@ const deleteAktivasi = async (req, res) => {
 module.exports = {
   getAktivasis,
   getAktivasiNextKode,
+  getAktivasiByUser,
   getAktivasiById,
   saveAktivasi,
   updateAktivasi,

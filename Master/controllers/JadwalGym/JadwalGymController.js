@@ -23,6 +23,33 @@ const getJadwalGyms = async (req, res) => {
   }
 };
 
+const getJadwalGymsMasihAda = async (req, res) => {
+  try {
+    let tempJadwalGyms = [];
+    const jadwalGyms = await JadwalGym.findAll({});
+
+    // Formatting date and Parsing json from string data
+    for (let element of jadwalGyms) {
+      if (
+        element.dataValues.jumlahMemberMax - element.dataValues.jumlahMember >
+        0
+      ) {
+        let objectJadwalGym = {
+          ...element.dataValues,
+          tanggal: formatDate(element.dataValues.tanggal),
+          libur: element.dataValues.libur === true ? "LIBUR" : "MASUK",
+        };
+        tempJadwalGyms.push(objectJadwalGym);
+      }
+    }
+
+    res.status(200).json(tempJadwalGyms);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getJadwalGymById = async (req, res) => {
   try {
     const jadwalGym = await JadwalGym.findOne({
@@ -110,6 +137,7 @@ const deleteJadwalGym = async (req, res) => {
 
 module.exports = {
   getJadwalGyms,
+  getJadwalGymsMasihAda,
   getJadwalGymById,
   saveJadwalGym,
   updateJadwalGym,

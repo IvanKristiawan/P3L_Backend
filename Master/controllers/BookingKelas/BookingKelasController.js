@@ -1,13 +1,37 @@
 const BookingKelas = require("../../models/BookingKelas/BookingKelasModel.js");
 const JadwalInstruktur = require("../../models/JadwalInstruktur/JadwalInstrukturModel.js");
 const User = require("../../../User/models/UserModel.js");
+const { findNextKode, formatDate } = require("../../../helper/helper");
 
 const getBookingKelas = async (req, res) => {
   try {
-    const bookingKelass = await BookingKelas.findAll({
+    let tempBookingKelas = [];
+    const bookingKelas = await BookingKelas.findAll({
       include: [{ model: User }, { model: JadwalInstruktur }],
     });
-    res.status(200).json(bookingKelass);
+
+    // Formatting date and Parsing json from string data
+    for (let element of bookingKelas) {
+      let objectBookingKelas = {
+        ...element.dataValues,
+        tanggal: formatDate(element.dataValues.jadwalkelas.dataValues.tanggal),
+        absensi: element.dataValues.absensi === true ? "DATANG" : "ABSEN",
+      };
+      tempBookingKelas.push(objectBookingKelas);
+    }
+
+    res.status(200).json(tempBookingKelas);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getBookingKelasNextKode = async (req, res) => {
+  try {
+    const bookingKelass = await BookingKelas.findAll({});
+    let nextKodeBookingKelas = findNextKode(bookingKelass.length, 6);
+    res.status(200).json(nextKodeBookingKelas);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
@@ -36,8 +60,12 @@ const saveBookingKelas = async (req, res) => {
     }
   });
 
+  const bookingKelass = await BookingKelas.findAll({});
+  let nextKodeBookingKelas = findNextKode(bookingKelass.length, 6);
+
   try {
     const insertedBookingKelas = await BookingKelas.create({
+      noBooking: nextKodeBookingKelas,
       ...req.body,
     });
     // Status 201 = Created
@@ -102,6 +130,7 @@ const deleteBookingKelas = async (req, res) => {
 
 module.exports = {
   getBookingKelas,
+  getBookingKelasNextKode,
   getBookingKelasById,
   saveBookingKelas,
   updateBookingKelas,

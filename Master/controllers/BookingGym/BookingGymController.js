@@ -1,13 +1,38 @@
 const BookingGym = require("../../models/BookingGym/BookingGymModel.js");
 const JadwalGym = require("../../models/JadwalGym/JadwalGymModel.js");
 const User = require("../../../User/models/UserModel.js");
+const Aktivasi = require("../../../User/models/Aktivasi/AktivasiModel.js");
+const { findNextKode, formatDate } = require("../../../helper/helper");
 
 const getBookingGyms = async (req, res) => {
   try {
+    let tempBookingGyms = [];
     const bookingGyms = await BookingGym.findAll({
       include: [{ model: User }, { model: JadwalGym }],
     });
-    res.status(200).json(bookingGyms);
+
+    // Formatting date and Parsing json from string data
+    for (let element of bookingGyms) {
+      let objectBookingGym = {
+        ...element.dataValues,
+        tanggal: formatDate(element.dataValues.jadwalgym.dataValues.tanggal),
+        absensi: element.dataValues.absensi === true ? "DATANG" : "ABSEN",
+      };
+      tempBookingGyms.push(objectBookingGym);
+    }
+
+    res.status(200).json(tempBookingGyms);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getBookingGymNextKode = async (req, res) => {
+  try {
+    const bookingGyms = await BookingGym.findAll({});
+    let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
+    res.status(200).json(nextKodeBookingGym);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
@@ -20,7 +45,7 @@ const getBookingGymById = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }],
+      include: [{ model: User }, { model: JadwalGym }],
     });
     res.status(200).json(bookingGym);
   } catch (error) {
@@ -36,8 +61,12 @@ const saveBookingGym = async (req, res) => {
     }
   });
 
+  const bookingGyms = await BookingGym.findAll({});
+  let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
+
   try {
     const insertedBookingGym = await BookingGym.create({
+      noBooking: nextKodeBookingGym,
       ...req.body,
     });
     // Status 201 = Created
@@ -102,6 +131,7 @@ const deleteBookingGym = async (req, res) => {
 
 module.exports = {
   getBookingGyms,
+  getBookingGymNextKode,
   getBookingGymById,
   saveBookingGym,
   updateBookingGym,

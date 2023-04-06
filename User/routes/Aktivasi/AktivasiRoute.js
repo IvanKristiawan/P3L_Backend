@@ -3,6 +3,7 @@ const controller = require("../../controllers/Aktivasi/AktivasiController.js");
 const verify = require("../../../utils/verifyToken.js");
 const getAktivasis = controller.getAktivasis;
 const getAktivasiNextKode = controller.getAktivasiNextKode;
+const getAktivasiByUser = controller.getAktivasiByUser;
 const getAktivasiById = controller.getAktivasiById;
 const saveAktivasi = controller.saveAktivasi;
 const updateAktivasi = controller.updateAktivasi;
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.post("/aktivasis", verifyUser, getAktivasis);
 router.post("/aktivasiNextKode", verifyUser, getAktivasiNextKode);
+router.post("/aktivasisByUser", verifyUser, getAktivasiByUser);
 router.post("/aktivasis/:id", verifyUser, getAktivasiById);
 router.post("/saveAktivasi", verifyUser, saveAktivasi);
 router.post("/updateAktivasi/:id", verifyUser, updateAktivasi);
