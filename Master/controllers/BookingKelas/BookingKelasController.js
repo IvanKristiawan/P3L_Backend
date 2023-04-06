@@ -14,7 +14,9 @@ const getBookingKelas = async (req, res) => {
     for (let element of bookingKelas) {
       let objectBookingKelas = {
         ...element.dataValues,
-        tanggal: formatDate(element.dataValues.jadwalkelas.dataValues.tanggal),
+        tanggal: formatDate(
+          element.dataValues.jadwalinstruktur.dataValues.tanggal
+        ),
         absensi: element.dataValues.absensi === true ? "DATANG" : "ABSEN",
       };
       tempBookingKelas.push(objectBookingKelas);
@@ -138,7 +140,7 @@ const deleteBookingKelas = async (req, res) => {
         id: bookingKelas.jadwalinstruktur.id,
       },
     });
-    let tempJumlahMember = jadwalGym.jumlahMember - 1;
+    let tempJumlahMember = jadwalInstruktur.jumlahMember - 1;
 
     await BookingKelas.destroy({
       where: {

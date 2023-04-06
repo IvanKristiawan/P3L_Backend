@@ -25,6 +25,32 @@ const getJadwalInstrukturs = async (req, res) => {
   }
 };
 
+const getJadwalInstrukturMasihAda = async (req, res) => {
+  try {
+    let tempJadwalInstruktur = [];
+    const jadwalInstruktur = await JadwalInstruktur.findAll({});
+
+    // Formatting date and Parsing json from string data
+    for (let element of jadwalInstruktur) {
+      if (
+        element.dataValues.jumlahMemberMax - element.dataValues.jumlahMember >
+        0
+      ) {
+        let objectJadwalInstruktur = {
+          ...element.dataValues,
+          tanggal: formatDate(element.dataValues.tanggal),
+        };
+        tempJadwalInstruktur.push(objectJadwalInstruktur);
+      }
+    }
+
+    res.status(200).json(tempJadwalInstruktur);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getJadwalInstrukturById = async (req, res) => {
   try {
     const jadwalinstruktur = await JadwalInstruktur.findOne({
@@ -113,6 +139,7 @@ const deleteJadwalInstruktur = async (req, res) => {
 
 module.exports = {
   getJadwalInstrukturs,
+  getJadwalInstrukturMasihAda,
   getJadwalInstrukturById,
   saveJadwalInstruktur,
   updateJadwalInstruktur,
