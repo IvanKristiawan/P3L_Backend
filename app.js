@@ -16,6 +16,7 @@ const BookingKelasRoute = require("./Master/routes/BookingKelas/BookingKelasRout
 const IzinInstrukturRoute = require("./Master/routes/IzinInstruktur/IzinInstrukturRoute.js");
 const LaporanKelasRoute = require("./Laporan/routes/LaporanKelas/LaporanKelasRoute.js");
 const LaporanGymRoute = require("./Laporan/routes/LaporanGym/LaporanGymRoute.js");
+const LaporanInstrukturRoute = require("./Laporan/routes/LaporanInstruktur/LaporanInstrukturRoute.js");
 
 const app = express();
 app.use(cors());
@@ -33,5 +34,6 @@ app.use(BookingKelasRoute);
 app.use(IzinInstrukturRoute);
 app.use(LaporanKelasRoute);
 app.use(LaporanGymRoute);
+app.use(LaporanInstrukturRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

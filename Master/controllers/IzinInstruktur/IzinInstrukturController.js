@@ -89,6 +89,23 @@ const konfirmasiIzinInstruktur = async (req, res) => {
       }
     );
 
+    const findUser = await User.findOne({
+      where: {
+        id: req.body.userId,
+      },
+    });
+    let tempJmlLibur = findUser.jmlLibur + 1;
+    await User.update(
+      {
+        jmlLibur: tempJmlLibur,
+      },
+      {
+        where: {
+          id: req.body.userId,
+        },
+      }
+    );
+
     res.status(200).json("Berhasil dikonfirmasi!");
   } catch (error) {
     // Error 404 = Not Found
@@ -135,6 +152,22 @@ const deleteIzinInstruktur = async (req, res) => {
       {
         where: {
           id: req.body.jadwalInstrukturId,
+        },
+      }
+    );
+    const findUser = await User.findOne({
+      where: {
+        id: req.body.userId,
+      },
+    });
+    let tempJmlLibur = findUser.jmlLibur - 1;
+    await User.update(
+      {
+        jmlLibur: tempJmlLibur,
+      },
+      {
+        where: {
+          id: req.body.userId,
         },
       }
     );

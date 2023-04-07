@@ -45,6 +45,11 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
+    laporanInstruktur: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
 
     // UTILITY
     profilUser: {

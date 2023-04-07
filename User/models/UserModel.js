@@ -29,6 +29,21 @@ const User = db.define(
       defaultValue: 0,
       allowNull: false,
     },
+    jmlLibur: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    jmlTerlambat: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    waktuTerlambat: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+      allowNull: false,
+    },
   },
   {
     freezeTableName: true,

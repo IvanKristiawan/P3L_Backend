@@ -133,6 +133,24 @@ const updateJadwalInstruktur = async (req, res) => {
     }
   });
   try {
+    const findUser = await User.findOne({
+      where: {
+        id: req.body.userId,
+      },
+    });
+    let tempWaktuTerlambat = findUser.waktuTerlambat + req.body.waktuTerlambat;
+    let tempJmlTerlambat = findUser.jmlTerlambat + 1;
+    await User.update(
+      {
+        waktuTerlambat: tempWaktuTerlambat,
+        jmlTerlambat: tempJmlTerlambat,
+      },
+      {
+        where: {
+          id: req.body.userId,
+        },
+      }
+    );
     await JadwalInstruktur.update(
       { ...req.body },
       {
