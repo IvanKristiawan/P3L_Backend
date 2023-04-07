@@ -124,6 +124,36 @@ const updateBookingGym = async (req, res) => {
   }
 };
 
+const presensiBookingGym = async (req, res) => {
+  Object.keys(req.body).forEach(function (k) {
+    if (typeof req.body[k] == "string") {
+      req.body[k] = req.body[k].toUpperCase().trim();
+    }
+  });
+  try {
+    await BookingGym.update(
+      { absensi: true },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    ).then((num) => {
+      // num come from numbers of updated data
+      if (num == 1) {
+        res.status(200).json({ message: "Booking Gym Updated!" });
+      } else {
+        res
+          .status(400)
+          .json({ message: `Booking Gym ${req.params.id} not found!` });
+      }
+    });
+  } catch (error) {
+    // Error 400 = Kesalahan dari sisi user
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const deleteBookingGym = async (req, res) => {
   try {
     const bookingGym = await BookingGym.findOne({
@@ -176,5 +206,6 @@ module.exports = {
   getBookingGymById,
   saveBookingGym,
   updateBookingGym,
+  presensiBookingGym,
   deleteBookingGym,
 };
