@@ -126,6 +126,36 @@ const updateBookingKelas = async (req, res) => {
   }
 };
 
+const presensiBookingKelas = async (req, res) => {
+  Object.keys(req.body).forEach(function (k) {
+    if (typeof req.body[k] == "string") {
+      req.body[k] = req.body[k].toUpperCase().trim();
+    }
+  });
+  try {
+    await BookingKelas.update(
+      { absensi: true },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    ).then((num) => {
+      // num come from numbers of updated data
+      if (num == 1) {
+        res.status(200).json({ message: "Booking Kelas Updated!" });
+      } else {
+        res
+          .status(400)
+          .json({ message: `Booking Kelas ${req.params.id} not found!` });
+      }
+    });
+  } catch (error) {
+    // Error 400 = Kesalahan dari sisi user
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const deleteBookingKelas = async (req, res) => {
   try {
     const bookingKelas = await BookingKelas.findOne({
@@ -178,5 +208,6 @@ module.exports = {
   getBookingKelasById,
   saveBookingKelas,
   updateBookingKelas,
+  presensiBookingKelas,
   deleteBookingKelas,
 };
