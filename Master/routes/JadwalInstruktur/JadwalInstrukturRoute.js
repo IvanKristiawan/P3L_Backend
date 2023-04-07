@@ -2,6 +2,7 @@ const express = require("express");
 const controller = require("../../controllers/JadwalInstruktur/JadwalInstrukturController.js");
 const verify = require("../../../utils/verifyToken.js");
 const getJadwalInstrukturs = controller.getJadwalInstrukturs;
+const getKelasHariIni = controller.getKelasHariIni;
 const getJadwalInstrukturMasihAda = controller.getJadwalInstrukturMasihAda;
 const getJadwalInstrukturById = controller.getJadwalInstrukturById;
 const saveJadwalInstruktur = controller.saveJadwalInstruktur;
@@ -12,6 +13,7 @@ const verifyUser = verify.verifyUser;
 const router = express.Router();
 
 router.post("/jadwalInstrukturs", verifyUser, getJadwalInstrukturs);
+router.post("/kelasHariIni", verifyUser, getKelasHariIni);
 router.post(
   "/jadwalInstruktursMasihAda",
   verifyUser,
