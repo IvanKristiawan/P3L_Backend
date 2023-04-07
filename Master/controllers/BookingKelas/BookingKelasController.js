@@ -73,6 +73,13 @@ const saveBookingKelas = async (req, res) => {
   });
   let tempJumlahMember = jadwalinstruktur.jumlahMember + 1;
 
+  const user = await User.findOne({
+    where: {
+      id: req.body.userId,
+    },
+  });
+  let tempDeposit = parseInt(user.deposit) - parseInt(jadwalinstruktur.harga);
+
   try {
     const insertedBookingKelas = await BookingKelas.create({
       noBooking: nextKodeBookingKelas,
@@ -85,6 +92,16 @@ const saveBookingKelas = async (req, res) => {
       {
         where: {
           id: req.body.jadwalInstrukturId,
+        },
+      }
+    );
+    await User.update(
+      {
+        deposit: tempDeposit,
+      },
+      {
+        where: {
+          id: req.body.userId,
         },
       }
     );

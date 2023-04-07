@@ -71,6 +71,13 @@ const saveBookingGym = async (req, res) => {
   const bookingGyms = await BookingGym.findAll({});
   let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
 
+  const user = await User.findOne({
+    where: {
+      id: req.body.userId,
+    },
+  });
+  let tempDeposit = parseInt(user.deposit) - parseInt(jadwalGym.harga);
+
   try {
     const insertedBookingGym = await BookingGym.create({
       noBooking: nextKodeBookingGym,
@@ -83,6 +90,16 @@ const saveBookingGym = async (req, res) => {
       {
         where: {
           id: req.body.jadwalGymId,
+        },
+      }
+    );
+    await User.update(
+      {
+        deposit: tempDeposit,
+      },
+      {
+        where: {
+          id: req.body.userId,
         },
       }
     );
