@@ -17,6 +17,11 @@ const Aktivasi = db.define(
       default: new Date(),
       allowNull: false,
     },
+    jumlahAktivasi: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
 
     // Foreign Key Cabang
     userId: {
