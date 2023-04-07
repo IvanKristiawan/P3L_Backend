@@ -34,6 +34,18 @@ const HakAkses = db.define(
       allowNull: false,
     },
 
+    // LAPORAN
+    laporanGym: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    laporanKelas: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+
     // UTILITY
     profilUser: {
       type: DataTypes.BOOLEAN,
