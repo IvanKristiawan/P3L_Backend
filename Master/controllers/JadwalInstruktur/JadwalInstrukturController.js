@@ -14,6 +14,7 @@ const getJadwalInstrukturs = async (req, res) => {
       let objectPengajuan = {
         ...element.dataValues,
         tanggal: formatDate(element.dataValues.tanggal),
+        libur: element.dataValues.libur === true ? "LIBUR" : "MASUK",
       };
       tempJadwalInstrukturs.push(objectPengajuan);
     }

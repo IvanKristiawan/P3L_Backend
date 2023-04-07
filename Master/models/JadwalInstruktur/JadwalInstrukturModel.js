@@ -42,6 +42,11 @@ const JadwalInstruktur = db.define(
       defaultValue: 0,
       allowNull: false,
     },
+    libur: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+      allowNull: false,
+    },
 
     // Foreign Key User
     userId: {

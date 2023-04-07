@@ -13,6 +13,7 @@ const JadwalInstrukturRoute = require("./Master/routes/JadwalInstruktur/JadwalIn
 const JadwalGymRoute = require("./Master/routes/JadwalGym/JadwalGymRoute.js");
 const BookingGymRoute = require("./Master/routes/BookingGym/BookingGymRoute.js");
 const BookingKelasRoute = require("./Master/routes/BookingKelas/BookingKelasRoute.js");
+const IzinInstrukturRoute = require("./Master/routes/IzinInstruktur/IzinInstrukturRoute.js");
 
 const app = express();
 app.use(cors());
@@ -27,5 +28,6 @@ app.use(JadwalInstrukturRoute);
 app.use(JadwalGymRoute);
 app.use(BookingGymRoute);
 app.use(BookingKelasRoute);
+app.use(IzinInstrukturRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
