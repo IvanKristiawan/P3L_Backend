@@ -77,6 +77,11 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
+    depositKelas: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
 
     // Foreign Key Cabang
     userId: {

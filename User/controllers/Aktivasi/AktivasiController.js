@@ -26,8 +26,16 @@ const getAktivasis = async (req, res) => {
 const getAktivasiNextKode = async (req, res) => {
   try {
     const aktivasis = await Aktivasi.findAll({});
-    let nextKodeAktivasi = findNextKode(aktivasis.length, 6);
-    res.status(200).json(nextKodeAktivasi);
+    let tempDate = new Date();
+    let tempFullYear = `${tempDate.getFullYear()}`;
+    let nextKodeAktivasi = findNextKode(aktivasis.length, 3);
+    tempNoMember = `${tempFullYear.slice(-2)}.${(
+      tempDate.getMonth() + 1
+    ).toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    })}.${nextKodeAktivasi}`;
+    res.status(200).json(tempNoMember);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
@@ -72,7 +80,15 @@ const saveAktivasi = async (req, res) => {
   });
 
   const aktivasis = await Aktivasi.findAll({});
-  let nextKodeAktivasi = findNextKode(aktivasis.length, 6);
+  let tempDate = new Date();
+  let nextKodeAktivasi = findNextKode(aktivasis.length, 3);
+  let tempFullYear = `${tempDate.getFullYear()}`;
+  tempNoMember = `${tempFullYear.slice(-2)}.${(
+    tempDate.getMonth() + 1
+  ).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  })}.${nextKodeAktivasi}`;
 
   let tempMasaAktif = new Date(req.body.masaAktif);
   tempMasaAktif.setFullYear(tempMasaAktif.getFullYear() + 1);
@@ -80,7 +96,7 @@ const saveAktivasi = async (req, res) => {
   try {
     const insertedAktivasi = await Aktivasi.create({
       ...req.body,
-      kodeAktivasi: nextKodeAktivasi,
+      kodeAktivasi: tempNoMember,
       masaAktif: tempMasaAktif,
     });
     // Status 201 = Created

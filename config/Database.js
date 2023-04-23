@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 // Connect PhpMyAdmin MySql to Nodejs
-const db = new Sequelize("gym_p3l", "root", "", {
+const db = new Sequelize("p3l_200710588", "root", "", {
   host: "localhost",
   dialect: "mysql",
 });

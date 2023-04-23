@@ -7,7 +7,13 @@ const getBookingKelas = async (req, res) => {
   try {
     let tempBookingKelas = [];
     const bookingKelas = await BookingKelas.findAll({
-      include: [{ model: User }, { model: JadwalInstruktur }],
+      include: [
+        { model: User },
+        {
+          model: JadwalInstruktur,
+          include: [{ model: User }],
+        },
+      ],
     });
 
     // Formatting date and Parsing json from string data
@@ -32,8 +38,16 @@ const getBookingKelas = async (req, res) => {
 const getBookingKelasNextKode = async (req, res) => {
   try {
     const bookingKelass = await BookingKelas.findAll({});
-    let nextKodeBookingKelas = findNextKode(bookingKelass.length, 6);
-    res.status(200).json(nextKodeBookingKelas);
+    let tempDate = new Date();
+    let tempFullYear = `${tempDate.getFullYear()}`;
+    let nextKodeBookingKelas = findNextKode(bookingKelass.length, 3);
+    tempNoMember = `${tempFullYear.slice(-2)}.${(
+      tempDate.getMonth() + 1
+    ).toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    })}.${nextKodeBookingKelas}`;
+    res.status(200).json(tempNoMember);
   } catch (error) {
     // Error 500 = Kesalahan di server
     res.status(500).json({ message: error.message });
@@ -46,7 +60,13 @@ const getBookingKelasById = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }, { model: JadwalInstruktur }],
+      include: [
+        { model: User },
+        {
+          model: JadwalInstruktur,
+          include: [{ model: User }],
+        },
+      ],
     });
     res.status(200).json(bookingKelas);
   } catch (error) {
@@ -63,7 +83,15 @@ const saveBookingKelas = async (req, res) => {
   });
 
   const bookingKelass = await BookingKelas.findAll({});
-  let nextKodeBookingKelas = findNextKode(bookingKelass.length, 6);
+  let tempDate = new Date();
+  let tempFullYear = `${tempDate.getFullYear()}`;
+  let nextKodeBookingKelas = findNextKode(bookingKelass.length, 3);
+  tempNoMember = `${tempFullYear.slice(-2)}.${(
+    tempDate.getMonth() + 1
+  ).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  })}.${nextKodeBookingKelas}`;
 
   const jadwalinstruktur = await JadwalInstruktur.findOne({
     where: {
@@ -82,7 +110,7 @@ const saveBookingKelas = async (req, res) => {
 
   try {
     const insertedBookingKelas = await BookingKelas.create({
-      noBooking: nextKodeBookingKelas,
+      noBooking: tempNoMember,
       ...req.body,
     });
     await JadwalInstruktur.update(

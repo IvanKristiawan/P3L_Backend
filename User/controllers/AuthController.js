@@ -2,6 +2,7 @@ const User = require("../models/UserModel.js");
 const HakAkses = require("../models/HakAkses/HakAksesModel.js");
 const { createError } = require("../../utils/error.js");
 const jwt = require("jsonwebtoken");
+const { findNextKode } = require("../../helper/helper");
 
 const register = async (req, res) => {
   try {
@@ -10,8 +11,27 @@ const register = async (req, res) => {
         req.body[k] = req.body[k].toUpperCase().trim();
       }
     });
+    let tempNoMember;
+
+    if (req.body.tipeUser === "MEMBER") {
+      const users = await User.findAll({
+        where: {
+          tipeUser: req.body.tipeUser,
+        },
+      });
+      let tempDate = new Date();
+      let tempFullYear = `${tempDate.getFullYear()}`;
+      let nextKodeBookingGym = findNextKode(users.length, 3);
+      tempNoMember = `${tempFullYear.slice(-2)}.${(
+        tempDate.getMonth() + 1
+      ).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      })}.${nextKodeBookingGym}`;
+    }
 
     const newUser = await User.create({
+      noMember: tempNoMember,
       ...req.body,
     });
 

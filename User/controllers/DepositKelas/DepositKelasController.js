@@ -1,10 +1,13 @@
-const Deposit = require("../../models/Deposit/DepositModel.js");
+const DepositKelas = require("../../models/DepositKelas/DepositKelasModel.js");
 const User = require("../../models/UserModel.js");
+const JadwalInstruktur = require("../../../Master/models/JadwalInstruktur/JadwalInstrukturModel.js");
 const { findNextKode } = require("../../../helper/helper");
 
-const getDeposits = async (req, res) => {
+const getDepositKelass = async (req, res) => {
   try {
-    const deposits = await Deposit.findAll({ include: [{ model: User }] });
+    const deposits = await DepositKelas.findAll({
+      include: [{ model: User }, { model: JadwalInstruktur }],
+    });
 
     res.status(200).json(deposits);
   } catch (error) {
@@ -13,9 +16,9 @@ const getDeposits = async (req, res) => {
   }
 };
 
-const getDepositNextKode = async (req, res) => {
+const getDepositKelasNextKode = async (req, res) => {
   try {
-    const deposits = await Deposit.findAll({});
+    const deposits = await DepositKelas.findAll({});
     let tempDate = new Date();
     let tempFullYear = `${tempDate.getFullYear()}`;
     let nextKodeDeposit = findNextKode(deposits.length, 3);
@@ -32,13 +35,13 @@ const getDepositNextKode = async (req, res) => {
   }
 };
 
-const getDepositById = async (req, res) => {
+const getDepositKelasById = async (req, res) => {
   try {
-    const deposit = await Deposit.findOne({
+    const deposit = await DepositKelas.findOne({
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }],
+      include: [{ model: User }, { model: JadwalInstruktur }],
     });
     res.status(200).json(deposit);
   } catch (error) {
@@ -47,7 +50,7 @@ const getDepositById = async (req, res) => {
   }
 };
 
-const saveDeposit = async (req, res) => {
+const saveDepositKelas = async (req, res) => {
   Object.keys(req.body).forEach(function (k) {
     if (typeof req.body[k] == "string") {
       req.body[k] = req.body[k].toUpperCase().trim();
@@ -61,7 +64,7 @@ const saveDeposit = async (req, res) => {
   });
   let tempDeposit = parseInt(user.deposit);
 
-  const deposits = await Deposit.findAll({});
+  const deposits = await DepositKelas.findAll({});
   let tempDate = new Date();
   let tempFullYear = `${tempDate.getFullYear()}`;
   let nextKodeDeposit = findNextKode(deposits.length, 6);
@@ -75,13 +78,13 @@ const saveDeposit = async (req, res) => {
   tempDeposit += parseInt(req.body.jumlahDeposit);
 
   try {
-    const insertedDeposit = await Deposit.create({
+    const insertedDeposit = await DepositKelas.create({
       ...req.body,
       noDeposit: tempNoMember,
     });
     await User.update(
       {
-        deposit: tempDeposit,
+        depositKelas: tempDeposit,
       },
       {
         where: {
@@ -97,14 +100,14 @@ const saveDeposit = async (req, res) => {
   }
 };
 
-const updateDeposit = async (req, res) => {
+const updateDepositKelas = async (req, res) => {
   Object.keys(req.body).forEach(function (k) {
     if (typeof req.body[k] == "string") {
       req.body[k] = req.body[k].toUpperCase().trim();
     }
   });
   try {
-    await Deposit.update(
+    await DepositKelas.update(
       { ...req.body },
       {
         where: {
@@ -127,13 +130,13 @@ const updateDeposit = async (req, res) => {
   }
 };
 
-const deleteDeposit = async (req, res) => {
+const deleteDepositKelas = async (req, res) => {
   try {
-    const deposit = await Deposit.findOne({
+    const deposit = await DepositKelas.findOne({
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }],
+      include: [{ model: User }, { model: JadwalInstruktur }],
     });
 
     const user = await User.findOne({
@@ -145,7 +148,7 @@ const deleteDeposit = async (req, res) => {
 
     tempDeposit -= parseInt(deposit.jumlahDeposit);
 
-    await Deposit.destroy({
+    await DepositKelas.destroy({
       where: {
         id: req.params.id,
       },
@@ -154,7 +157,7 @@ const deleteDeposit = async (req, res) => {
       if (num == 1) {
         await User.update(
           {
-            deposit: tempDeposit,
+            depositKelas: tempDeposit,
           },
           {
             where: {
@@ -176,10 +179,10 @@ const deleteDeposit = async (req, res) => {
 };
 
 module.exports = {
-  getDeposits,
-  getDepositNextKode,
-  getDepositById,
-  saveDeposit,
-  updateDeposit,
-  deleteDeposit,
+  getDepositKelass,
+  getDepositKelasNextKode,
+  getDepositKelasById,
+  saveDepositKelas,
+  updateDepositKelas,
+  deleteDepositKelas,
 };

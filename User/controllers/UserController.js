@@ -34,6 +34,7 @@ const updateUser = async (req, res) => {
     await User.update(
       {
         ...req.body,
+        password: tempPassword,
         akses: JSON.stringify(req.body.akses),
       },
       {

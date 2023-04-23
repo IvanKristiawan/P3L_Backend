@@ -6,6 +6,11 @@ const { DataTypes } = Sequelize;
 const User = db.define(
   "users",
   {
+    noMember: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: true,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,6 +18,21 @@ const User = db.define(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    alamat: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: true,
+    },
+    telepon: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: true,
+    },
+    tanggalLahir: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: true,
     },
     tipeUser: {
       type: DataTypes.STRING,
@@ -25,6 +45,11 @@ const User = db.define(
       allowNull: false,
     },
     deposit: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    depositKelas: {
       type: DataTypes.FLOAT,
       defaultValue: 0,
       allowNull: false,

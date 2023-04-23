@@ -31,7 +31,15 @@ const getBookingGyms = async (req, res) => {
 const getBookingGymNextKode = async (req, res) => {
   try {
     const bookingGyms = await BookingGym.findAll({});
-    let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
+    let tempDate = new Date();
+    let tempFullYear = `${tempDate.getFullYear()}`;
+    let nextKodeBookingGym = findNextKode(bookingGyms.length, 3);
+    tempNoMember = `${tempFullYear.slice(-2)}.${(
+      tempDate.getMonth() + 1
+    ).toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    })}.${nextKodeBookingGym}`;
     res.status(200).json(nextKodeBookingGym);
   } catch (error) {
     // Error 500 = Kesalahan di server
@@ -69,7 +77,15 @@ const saveBookingGym = async (req, res) => {
   let tempJumlahMember = jadwalGym.jumlahMember + 1;
 
   const bookingGyms = await BookingGym.findAll({});
-  let nextKodeBookingGym = findNextKode(bookingGyms.length, 6);
+  let tempDate = new Date();
+  let tempFullYear = `${tempDate.getFullYear()}`;
+  let nextKodeBookingGym = findNextKode(bookingGyms.length, 3);
+  tempNoMember = `${tempFullYear.slice(-2)}.${(
+    tempDate.getMonth() + 1
+  ).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  })}.${nextKodeBookingGym}`;
 
   const user = await User.findOne({
     where: {
@@ -80,7 +96,7 @@ const saveBookingGym = async (req, res) => {
 
   try {
     const insertedBookingGym = await BookingGym.create({
-      noBooking: nextKodeBookingGym,
+      noBooking: tempNoMember,
       ...req.body,
     });
     await JadwalGym.update(
