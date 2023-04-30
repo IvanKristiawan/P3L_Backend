@@ -87,13 +87,6 @@ const saveBookingGym = async (req, res) => {
     useGrouping: false,
   })}.${nextKodeBookingGym}`;
 
-  const user = await User.findOne({
-    where: {
-      id: req.body.userId,
-    },
-  });
-  let tempDeposit = parseInt(user.deposit) - parseInt(jadwalGym.harga);
-
   try {
     const insertedBookingGym = await BookingGym.create({
       noBooking: tempNoMember,
@@ -106,16 +99,6 @@ const saveBookingGym = async (req, res) => {
       {
         where: {
           id: req.body.jadwalGymId,
-        },
-      }
-    );
-    await User.update(
-      {
-        deposit: tempDeposit,
-      },
-      {
-        where: {
-          id: req.body.userId,
         },
       }
     );

@@ -31,11 +31,6 @@ const JadwalGym = db.define(
       defaultValue: 0,
       allowNull: false,
     },
-    harga: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false,
-    },
     libur: {
       type: DataTypes.BOOLEAN,
       default: false,
