@@ -45,13 +45,14 @@ findNextKodeSubGroupCOA = (dataLength, digitLength = 1) => {
 
 // formatDate function will return dd-mm-yyyy for UI Indonesia
 formatDate = (date) => {
-  return `${date.getDate().toLocaleString("en-US", {
+  let tempDate = new Date(date);
+  return `${tempDate.getDate().toLocaleString("en-US", {
     minimumIntegerDigits: 2,
     useGrouping: false,
-  })}-${(date.getMonth() + 1).toLocaleString("en-US", {
+  })}-${(tempDate.getMonth() + 1).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
     useGrouping: false,
-  })}-${date.getFullYear()}`;
+  })}-${tempDate.getFullYear()}`;
 };
 
 module.exports = {

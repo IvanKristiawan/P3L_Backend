@@ -39,7 +39,7 @@ const JadwalGym = db.define(
     libur: {
       type: DataTypes.BOOLEAN,
       default: false,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

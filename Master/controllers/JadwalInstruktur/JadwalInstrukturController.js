@@ -31,17 +31,21 @@ const getJadwalInstrukturs = async (req, res) => {
 const getKelasHariIni = async (req, res) => {
   try {
     let tempJadwalInstrukturs = [];
+    let tempDate = new Date(req.body.hariIni);
+    let tempTomorow = new Date(req.body.hariIni);
+    tempTomorow = tempTomorow.setDate(tempTomorow.getDate() + 1);
+    let tempDateTommorow = new Date(tempTomorow);
     const jadwalinstrukturs = await JadwalInstruktur.findAll({
       where: {
         [Op.and]: [
           {
             tanggal: {
-              [Op.gte]: new Date(),
+              [Op.gte]: tempDate,
             },
           },
           {
             tanggal: {
-              [Op.lte]: new Date(),
+              [Op.lt]: tempDateTommorow,
             },
           },
         ],

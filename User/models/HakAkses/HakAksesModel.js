@@ -23,6 +23,11 @@ const HakAkses = db.define(
       defaultValue: false,
       allowNull: false,
     },
+    kelas: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
     jadwalInstruktur: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

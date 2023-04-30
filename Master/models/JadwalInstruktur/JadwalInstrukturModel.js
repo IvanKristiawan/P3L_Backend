@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const db = require("../../../config/Database.js");
+const Kelas = require("../../models/Kelas/KelasModel.js");
 const User = require("../../../User/models/UserModel.js");
 
 const { DataTypes } = Sequelize;
@@ -23,7 +24,7 @@ const JadwalInstruktur = db.define(
       allowNull: false,
     },
     tanggal: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       default: new Date(),
       allowNull: false,
     },
@@ -45,6 +46,13 @@ const JadwalInstruktur = db.define(
     libur: {
       type: DataTypes.BOOLEAN,
       default: false,
+      allowNull: true,
+    },
+
+    // Foreign Key Kelas
+    kelasId: {
+      type: DataTypes.INTEGER,
+      default: 1,
       allowNull: false,
     },
 
@@ -59,6 +67,11 @@ const JadwalInstruktur = db.define(
     freezeTableName: true,
   }
 );
+
+JadwalInstruktur.belongsTo(Kelas, {
+  foreignKey: "kelasId",
+  targetKey: "id",
+});
 
 JadwalInstruktur.belongsTo(User, {
   foreignKey: "userId",
