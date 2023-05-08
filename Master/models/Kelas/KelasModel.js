@@ -16,6 +16,11 @@ const Kelas = db.define(
       default: "",
       allowNull: true,
     },
+    harga: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true,
+    },
   },
   {
     freezeTableName: true,
