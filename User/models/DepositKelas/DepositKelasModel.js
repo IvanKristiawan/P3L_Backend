@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const db = require("../../../config/Database.js");
 const User = require("../../models/UserModel.js");
-const JadwalInstruktur = require("../../../Master/models/JadwalInstruktur/JadwalInstrukturModel.js");
+const Kelas = require("../../../Master/models/Kelas/KelasModel.js");
 
 const { DataTypes } = Sequelize;
 
@@ -13,14 +13,19 @@ const DepositKelas = db.define(
       default: "",
       allowNull: false,
     },
+    sisaDeposit: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     jumlahDeposit: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
 
-    // Foreign Key Jadwal Gym
-    jadwalInstrukturId: {
+    // Foreign Key Kelas
+    kelasId: {
       type: DataTypes.INTEGER,
       default: 1,
       allowNull: false,
@@ -38,8 +43,8 @@ const DepositKelas = db.define(
   }
 );
 
-DepositKelas.belongsTo(JadwalInstruktur, {
-  foreignKey: "jadwalInstrukturId",
+DepositKelas.belongsTo(Kelas, {
+  foreignKey: "kelasId",
   targetKey: "id",
 });
 

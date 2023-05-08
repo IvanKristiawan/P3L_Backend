@@ -9,6 +9,7 @@ const aktivasiUser = content.aktivasiUser;
 const updateDepositUser = content.updateDepositUser;
 const getUsers = content.getUsers;
 const getUsersManager = content.getUsersManager;
+const getUsersKasir = content.getUsersKasir;
 const getUsersAdmin = content.getUsersAdmin;
 const getUsersInstruktur = content.getUsersInstruktur;
 const getUsersMember = content.getUsersMember;
@@ -28,6 +29,7 @@ router.post("/updateDepositUser/:id", verifyUser, updateDepositUser);
 // GET ALL
 router.post("/users/", verifyUser, getUsers);
 router.post("/usersManager/", verifyUser, getUsersManager);
+router.post("/usersKasir/", verifyUser, getUsersKasir);
 router.post("/usersAdmin/", verifyUser, getUsersAdmin);
 router.post("/usersInstruktur/", verifyUser, getUsersInstruktur);
 router.post("/usersMember/", verifyUser, getUsersMember);

@@ -1,12 +1,12 @@
 const DepositKelas = require("../../models/DepositKelas/DepositKelasModel.js");
 const User = require("../../models/UserModel.js");
-const JadwalInstruktur = require("../../../Master/models/JadwalInstruktur/JadwalInstrukturModel.js");
+const Kelas = require("../../../Master/models/Kelas/KelasModel.js");
 const { findNextKode } = require("../../../helper/helper");
 
 const getDepositKelass = async (req, res) => {
   try {
     const deposits = await DepositKelas.findAll({
-      include: [{ model: User }, { model: JadwalInstruktur }],
+      include: [{ model: User }, { model: Kelas }],
     });
 
     res.status(200).json(deposits);
@@ -41,7 +41,7 @@ const getDepositKelasById = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }, { model: JadwalInstruktur }],
+      include: [{ model: User }, { model: Kelas }],
     });
     res.status(200).json(deposit);
   } catch (error) {
@@ -62,7 +62,7 @@ const saveDepositKelas = async (req, res) => {
       id: req.body.userId,
     },
   });
-  let tempDeposit = parseInt(user.deposit);
+  let tempDeposit = parseInt(user.depositKelas);
 
   const deposits = await DepositKelas.findAll({});
   let tempDate = new Date();
@@ -136,7 +136,7 @@ const deleteDepositKelas = async (req, res) => {
       where: {
         id: req.params.id,
       },
-      include: [{ model: User }, { model: JadwalInstruktur }],
+      include: [{ model: User }, { model: Kelas }],
     });
 
     const user = await User.findOne({
@@ -144,7 +144,7 @@ const deleteDepositKelas = async (req, res) => {
         id: req.body.userId,
       },
     });
-    let tempDeposit = parseInt(user.deposit);
+    let tempDeposit = parseInt(user.depositKelas);
 
     tempDeposit -= parseInt(deposit.jumlahDeposit);
 

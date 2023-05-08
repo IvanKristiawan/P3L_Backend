@@ -12,6 +12,11 @@ const Deposit = db.define(
       default: "",
       allowNull: false,
     },
+    sisaDeposit: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     jumlahDeposit: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

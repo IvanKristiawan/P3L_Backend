@@ -303,6 +303,36 @@ const getUsersManager = async (req, res) => {
   }
 };
 
+const getUsersKasir = async (req, res) => {
+  try {
+    let tempAllUser = [];
+    const users = await User.findAll({
+      where: {
+        tipeUser: "KASIR",
+      },
+    });
+
+    for (let user of users) {
+      let hakAkses = await HakAkses.findOne({
+        where: {
+          userId: user.dataValues.id,
+        },
+      });
+      const { ...otherDetails } = user.dataValues;
+      let objectUser = {
+        ...otherDetails,
+        akses: hakAkses,
+      };
+      tempAllUser.push(objectUser);
+    }
+
+    res.status(200).json(tempAllUser);
+  } catch (error) {
+    // Error 500 = Kesalahan di server
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getUsersAdmin = async (req, res) => {
   try {
     let tempAllUser = [];
@@ -432,6 +462,7 @@ module.exports = {
   updateDepositUser,
   getUsers,
   getUsersManager,
+  getUsersKasir,
   getUsersAdmin,
   getUsersInstruktur,
   getUsersMember,
